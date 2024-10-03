@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add User</title>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Add User</h1>
+<form action="/admin/add" method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="lastName" placeholder="Last Name" required>
+    <input type="number" name="height" placeholder="Height" required>
+    <input type="number" name="weight" placeholder="Weight" required>
+    <button class="link-button" type="submit">Save</button>
+</form>
+<form action="/logout" method="POST" style="display:inline;">
+    <button class="button" type="submit">Logout</button>
+</form>
+<br></br>
+<a class="button" href="/admin">Back to List</a>
+</body>
+</html>
