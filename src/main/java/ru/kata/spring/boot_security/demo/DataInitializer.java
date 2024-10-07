@@ -6,7 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
+import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import java.util.HashSet;
@@ -19,7 +19,7 @@ public class DataInitializer implements CommandLineRunner {
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private RoleService roleService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -27,11 +27,18 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Role userRole = new Role("USER");
-        Role adminRole = new Role("ADMIN");
+        Role userRole = roleService.findById(1);
+        if (userRole == null) {
+            userRole = new Role("USER");
+            roleService.save(userRole);
+        }
 
-        roleRepository.save(userRole);
-        roleRepository.save(adminRole);
+        Role adminRole = roleService.findById(2);
+        if (adminRole == null) {
+            adminRole = new Role("ADMIN");
+            roleService.save(adminRole);
+        }
+
 
         User user = new User();
         user.setUsername("user");
